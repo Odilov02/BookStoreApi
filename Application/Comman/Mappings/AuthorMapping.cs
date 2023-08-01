@@ -5,11 +5,7 @@ namespace Application.Comman.Mappings
 {
     public class AuthorMapping : Profile
     {
-        public AuthorMapping()
-        {
-            AuthorMap();
-
-        }
+        public AuthorMapping() => AuthorMap();
         private void AuthorMap()
         {
             CreateMap<CreateAuthorCommand, Author>();

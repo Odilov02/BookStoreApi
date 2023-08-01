@@ -5,10 +5,7 @@ namespace Application.Comman.Mappings;
 
 public class BasketMapping:Profile
 {
-    public BasketMapping()
-    {
-        BasketMap();
-    }
+    public BasketMapping() => BasketMap();
         void BasketMap()
         {
             CreateMap<CreateBasketCommand, Basket>();

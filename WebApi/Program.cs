@@ -29,10 +29,10 @@ namespace WebApi
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseGlobalExceptionMiddleware();
 
 
             app.MapControllers();
-
             app.Run();
         }
     }

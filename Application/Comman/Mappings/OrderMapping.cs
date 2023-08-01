@@ -2,12 +2,9 @@
 
 namespace Application.Comman.Mappings
 {
-    public class OrderMapping:Profile
+    public class OrderMapping : Profile
     {
-        public OrderMapping()
-        {
-            OrderMap();
-        }
+        public OrderMapping() => OrderMap();
         void OrderMap()
         {
             CreateMap<CreateOrderCommand, Order>();

@@ -5,10 +5,7 @@ namespace Application.Comman.Mappings
 {
     public class CategoryMapping : Profile
     {
-        public CategoryMapping()
-        {
-            CategoryMap();
-        }
+        public CategoryMapping() => CategoryMap();
         private void CategoryMap()
         {
             CreateMap<CreateCategoryCommand, Category>();
