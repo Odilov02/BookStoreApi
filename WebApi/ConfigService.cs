@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Comman.Interfaces;
+using Domain.Entities;
 using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using WebApi.Comman.Interfaces;
@@ -10,10 +11,12 @@ namespace WebApi
     {
         public static IServiceCollection AddWebUIServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
             services.AddIdentity<User, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddSignInManager();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
             return services;
         }
     }
