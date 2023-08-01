@@ -1,9 +1,12 @@
-﻿namespace Application.UseCases.Users.Command.CreateUser;
+﻿namespace Application.UseCases.Users.Command.UpdateUser;
 
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 {
-    public CreateUserCommandValidator()
+    public UpdateUserCommandValidator()
     {
+        RuleFor(x => x.Id)
+           .NotEmpty().WithMessage("Id is required.");
+
         RuleFor(x => x.Email)
           .NotEmpty().WithMessage("Email is required")
           .Matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$").WithMessage("Email must be in the format exemple@gmail.com");
@@ -22,5 +25,6 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
                  .WithMessage("Password must contain at least 4 letters and 4 numbers.");
 
         RuleFor(x => x.ConfirmPassword).Equal("PasswordHash").WithMessage("Confirm Password is not homogeneous");
+
     }
 }

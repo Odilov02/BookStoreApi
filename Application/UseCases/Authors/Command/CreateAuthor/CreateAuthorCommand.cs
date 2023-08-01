@@ -1,5 +1,4 @@
-﻿
-namespace Application.UseCases.Authors.Command.CreateAuthor;
+﻿namespace Application.UseCases.Authors.Command.CreateAuthor;
 
 public record CreateAuthorCommand(string FullName, string ImgUrl, string Description) : IRequest<bool>;
 public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, bool>
