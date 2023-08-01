@@ -1,5 +1,4 @@
-﻿using Application.Comman.Extentions;
-using Application.Comman.Interfaces;
+﻿using Application.Comman.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -23,14 +22,5 @@ public class ApplicationDbContext : IdentityDbContext<User>, IApplicatonDbcontex
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
-        builder.Entity<User>().HasData(
-            new User()
-            {
-                FullName = "Diyorbek",
-                Email = "diyorbek02odilov@gmail.com",
-                PhoneNumber = "+998942922288",
-                PasswordHash = "020819".stringHash(),
-            }
-            );
     }
 }

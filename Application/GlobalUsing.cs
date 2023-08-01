@@ -7,3 +7,4 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using Application.Comman.Exceptions;
 global using Application.Comman.Extentions;
+global using FluentValidation;
