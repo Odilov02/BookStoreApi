@@ -10,6 +10,7 @@ public class Order:BaseEntity
     public virtual Book Book { get; set; }
 
     public decimal Price { get; set; }
+    public int Count { get; set; }
 
     public bool IsDeliver { get; set; }
 }
