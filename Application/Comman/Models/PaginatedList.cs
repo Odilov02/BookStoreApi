@@ -20,13 +20,13 @@ public class PaginatedList<T>
     {
         List<T>? items = null;
         int count = collection.Count;
-        if (count==pageSize*pageIndex)
+        if (count == pageSize * pageIndex)
         {
-        items = collection.Skip((pageSize - 1)*pageIndex).Take(pageSize*pageIndex).ToList();
+            items = collection.Skip((pageSize - 1) * pageIndex).Take(pageSize * pageIndex).ToList();
         }
         else
         {
-            items = collection.Skip((pageIndex - 1)*pageIndex).ToList();
+            items = collection.Skip((pageIndex - 1) * pageIndex).ToList();
         }
 
         return new PaginatedList<T>(items, count, pageSize, pageIndex);

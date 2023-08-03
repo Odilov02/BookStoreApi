@@ -10,19 +10,22 @@ namespace WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController : BaseApiController
+public class UserController : ControllerBase
 {
+
     private readonly IMapper _mapper;
     private readonly IUserManigerService<User> _userManager;
 
-    public UserController(IUserManigerService<User> userManager, IMapper mapper)
+    private readonly IMediator _mediator;
+    public UserController(IUserManigerService<User> userManager, IMapper mapper, IMediator mediator)
     {
         _mapper = mapper;
         _userManager = userManager;
+        _mediator = mediator;
     }
 
     [HttpPost("[action]")]
-    public IActionResult CreateUser(CreateUserCommand1 command) => Ok(_mediator.Send(command));
+    public IActionResult CreateUser(CreateUserCommand command) => Ok(_mediator.Send(command));
     //public async Task<IActionResult> CreateUser(CreateUserCommand command)
     //{
     //    var user = _mapper.Map<User>(command);

@@ -14,10 +14,10 @@ public class CreateUserCommand : IRequest<ResponseCore<User>>
 }
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ResponseCore<User>>
 {
-    private readonly IUserManigerService<User> _userManager;
+    private readonly UserManager<User> _userManager;
     private readonly IMapper _mapper;
 
-    public CreateUserCommandHandler(IUserManigerService<User> userManager, IMapper mapper)
+    public CreateUserCommandHandler(UserManager<User> userManager, IMapper mapper)
     {
         _userManager = userManager;
         _mapper = mapper;
@@ -25,18 +25,16 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Respo
     public async Task<ResponseCore<User>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<User>(request);
-        user.Password = user.Password;
-        var result = await _userManager.CreateAsync(user,user.Password);
-        var respone = new ResponseCore<User>()
+        var result = await _userManager.CreateAsync(user, user.Password);
+        var response = new ResponseCore<User>()
         {
             Result = user,
-            IsSuccess = result
+            IsSuccess = result.Succeeded
         };
-        string ss = "sss";
-        //result.Errors.ToList().ForEach(eror =>
-        //{
-        //    respone.Errors.ToList().Add(eror.Description);
-        //});
-        return respone;
+        result.Errors.ToList().ForEach(error =>
+        {
+            response.Errors.Add(error.Description);
+        });
+        return response;
     }
 }

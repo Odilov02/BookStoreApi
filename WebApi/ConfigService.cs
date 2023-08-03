@@ -14,6 +14,7 @@ namespace WebApi
             services.AddIdentity<User, IdentityRole>()
                     .AddUserManager<UserManager<User>>()
                     .AddRoleManager<RoleManager<IdentityRole>>()
+                    .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddSignInManager();
 
