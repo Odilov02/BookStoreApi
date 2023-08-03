@@ -6,19 +6,22 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.Property(x => x.Id).IsRequired();
-        builder.HasIndex(x => x.Id).IsUnique();
-        builder.Property(x => x.Email).IsRequired();
-        builder.HasIndex(x => x.Email).IsUnique();
+        builder.Property(x => x.FullName).IsRequired().HasMaxLength(50);
+
         builder.Property(x => x.PhoneNumber).IsRequired();
         builder.HasIndex(x => x.PhoneNumber).IsUnique();
-        builder.Property(x => x.FullName).IsRequired().HasMaxLength(50);
+
+        builder.Property(x => x.UserName).IsRequired().HasMaxLength(50);
+        builder.HasIndex(x => x.UserName).IsUnique();
+
+        builder.Property(x => x.Password).IsRequired();
+
         builder.HasData(new User()
         {
             FullName = "Diyorbek",
-            Email = "diyorbek02odilov@gmail.com",
+            UserName = "DiyorbekOdilov",
             PhoneNumber = "+998942922288",
-            PasswordHash = "diyorbek020819".stringHash(),
+            Password = "diyorbek020819".stringHash(),
         });
     }
 }

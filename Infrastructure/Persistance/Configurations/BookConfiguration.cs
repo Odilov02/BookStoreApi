@@ -16,10 +16,10 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
 
         builder.Property(x => x.CategoryId).IsRequired();
 
-        builder.Property(x => x.Count).IsRequired().Metadata.SetIdentityMinValue(0);
+        builder.Property(x => x.Count).IsRequired();
 
-        builder.Property(x => x.Price).IsRequired().Metadata.SetIdentityMinValue(0);
+        builder.Property(x => x.Price).IsRequired();
 
-        builder.Property(x => x.PageCount).IsRequired().Metadata.SetIdentityMinValue(0);
+        builder.Property(x => x.PageCount).IsRequired();
     }
 }

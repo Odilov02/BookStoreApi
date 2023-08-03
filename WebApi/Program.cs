@@ -6,20 +6,18 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         var builder = WebApplication.CreateBuilder(args);
-
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        var configuration = builder.Configuration;
 
-        builder.Services.AddInfrastructureServices(configuration);
-        builder.Services.AddApplicationServices(configuration);
-        builder.Services.AddWebUIServices(configuration);
+        builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddApplicationServices();
+        builder.Services.AddWebUIServices();
 
         var app = builder.Build();
-
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -28,9 +26,9 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.UseAuthorization();
         app.UseGlobalExceptionMiddleware();
-
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.MapControllers();
         app.Run();

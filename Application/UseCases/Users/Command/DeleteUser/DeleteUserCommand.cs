@@ -1,18 +1,27 @@
 ﻿namespace Application.UseCases.Users.Command.DeleteUser;
 
-public record DeleteUserCommand(Guid Id) : IRequest<bool>;
+public record DeleteUserCommand(string UserName,string Password) : IRequest<ResponseCore<User>>;
 
-public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, bool>
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ResponseCore<User>>
 {
-    private readonly UserManager<User> _userManager;
+    private readonly IUserManigerService<User> _userManager;
 
-    public DeleteUserCommandHandler(UserManager<User> userManager) => _userManager = userManager;
+    public DeleteUserCommandHandler(IUserManigerService<User> userManager) => _userManager = userManager;
 
-    public async Task<bool> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task<ResponseCore<User>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == request.Id.ToString());
-        if (user == null) throw new NotFoundException(typeof(User).Name, request.Id);
+        var user = await _userManager.Users.FirstOrDefaultAsync(x=>x.UserName==request.UserName&&x.Password==request.Password.stringHash());
+        if (user == null) throw new NotFoundException(typeof(User).Name, request.UserName);
         var result = await _userManager.DeleteAsync(user);
-        return result.Succeeded;
+        var respone = new ResponseCore<User>()
+        {
+            Result = user,
+            IsSuccess = result.Succeeded,
+        };
+        result.Errors.ToList().ForEach(eror =>
+        {
+            respone?.Errors?.ToList().Add(eror.Description);
+        });
+        return respone;
     }
 }

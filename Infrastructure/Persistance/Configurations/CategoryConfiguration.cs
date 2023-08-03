@@ -6,7 +6,5 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
         builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
 
-        builder.Property(x => x.Id).IsRequired();
-        builder.HasIndex(x => x.Id).IsUnique();
     }
 }

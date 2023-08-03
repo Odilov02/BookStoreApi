@@ -1,5 +1,4 @@
-﻿using Application.Comman.Interfaces;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 namespace WebApi.Comman.Services
 {

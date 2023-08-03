@@ -10,6 +10,6 @@ public interface IApplicatonDbcontext
     DbSet<Category> Categories { get; }
     DbSet<Author> Authors { get; }
     DbSet<Order> Orders { get; }
-    public DbSet<Basket> Baskets { get; set; }
+    DbSet<Basket> Baskets { get; set; }
     Task<int> SaveChangesAsync(CancellationToken token = default);
 }

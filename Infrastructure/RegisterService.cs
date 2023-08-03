@@ -12,7 +12,8 @@ public static class RegisterService
         {
             options.UseNpgsql(configuration.GetConnectionString("Default"));
         });
-        services.AddScoped<IApplicatonDbcontext, ApplicationDbContext>();
+
+        services.AddScoped<IApplicatonDbcontext>(sp=>sp.GetRequiredService<ApplicationDbContext>());
         return services;
 
     }
