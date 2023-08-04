@@ -14,14 +14,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.UserName).IsRequired().HasMaxLength(50);
         builder.HasIndex(x => x.UserName).IsUnique();
 
-        builder.Property(x => x.Password).IsRequired();
+        builder.Property(x => x.PasswordHash).IsRequired();
 
         builder.HasData(new User()
         {
             FullName = "Diyorbek",
             UserName = "DiyorbekOdilov",
             PhoneNumber = "+998942922288",
-            Password = "diyorbek020819".stringHash(),
+            PasswordHash = "diyorbek020819".stringHash(),
         });
     }
 }

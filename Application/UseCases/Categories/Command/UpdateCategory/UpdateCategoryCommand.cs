@@ -6,7 +6,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 {
     private readonly IApplicatonDbcontext _dbContext;
     private readonly IMapper _mapper;
-    public UpdateCategoryCommandHandler(IApplicatonDbcontext dbContext, IMapper mapper = null)
+    public UpdateCategoryCommandHandler(IApplicatonDbcontext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;

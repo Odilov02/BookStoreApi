@@ -6,13 +6,13 @@ public class UpdateUserCommand : IRequest<ResponseCore<User>>
     public string FullName { get; set; }
     public string PhoneNumber { get; set; }
     public string UserName { get; set; }
-    public string Password { get; set; }
+    public string PasswordHash { get; set; }
     public string ConfirmPassword { get; set; }
 }
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResponseCore<User>>
 {
-    private readonly IUserManigerService<User> _userManager;
-    public UpdateUserCommandHandler(IUserManigerService<User> userManager) => _userManager = userManager;
+    private readonly UserStore<User> _userManager;
+    public UpdateUserCommandHandler(UserStore<User> userManager) => _userManager = userManager;
 
     public async Task<ResponseCore<User>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
@@ -21,7 +21,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Respo
         user.FullName = request.FullName;
         user.PhoneNumber = request.PhoneNumber;
         user.UserName = request.UserName;
-        user.Password = request.Password.stringHash();
+        user.PasswordHash = request.PasswordHash.stringHash();
         var result = await _userManager.UpdateAsync(user);
         var respone = new ResponseCore<User>()
         {

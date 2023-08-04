@@ -4,7 +4,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseApiController : ControllerBase
+    public class ApiControllerBase : ControllerBase
     {
         protected IMediator _mediator => HttpContext.RequestServices.GetRequiredService<IMediator>();
     }

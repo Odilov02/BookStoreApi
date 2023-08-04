@@ -17,7 +17,7 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
            .WithMessage("Full Name is required.")
            .MaximumLength(50).WithMessage("Full Name must have a maximum length of 50 characters.");
 
-        RuleFor(x => x.Password)
+        RuleFor(x => x.PasswordHash)
             .NotEmpty().WithMessage("Password is required.");
     }
 }

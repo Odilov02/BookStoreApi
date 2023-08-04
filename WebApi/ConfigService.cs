@@ -12,9 +12,8 @@ namespace WebApi
             services.AddMediatR(src => src.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
             services.AddIdentity<User, IdentityRole>()
-                    .AddUserManager<UserManager<User>>()
+                    .AddUserStore<User>()
                     .AddRoleManager<RoleManager<IdentityRole>>()
-                    .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddSignInManager();
 
@@ -26,4 +25,3 @@ namespace WebApi
         }
     }
 }
- 
